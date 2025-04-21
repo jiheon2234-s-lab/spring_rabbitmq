@@ -25,6 +25,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
 
+    //step3
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
+
+
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.amqp:spring-rabbit-test")
