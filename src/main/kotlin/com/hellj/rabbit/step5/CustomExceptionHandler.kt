@@ -11,9 +11,9 @@ class CustomExceptionHandler(
         val message = e.message
 
         val routingKey = when (e) {
-            is NullPointerException -> "error"
-            is IllegalArgumentException -> "warn"
-            else -> "error"
+            is NullPointerException -> "log.error"
+            is IllegalArgumentException -> "log.warn"
+            else -> "log.error"
         }
 
         logPublisher.publish(routingKey, "Exception occurs.. $message")

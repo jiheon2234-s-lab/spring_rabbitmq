@@ -2,8 +2,8 @@ package com.hellj.rabbit.step5
 
 import org.springframework.amqp.core.Binding
 import org.springframework.amqp.core.BindingBuilder
-import org.springframework.amqp.core.DirectExchange
 import org.springframework.amqp.core.Queue
+import org.springframework.amqp.core.TopicExchange
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -16,13 +16,21 @@ class RabbitMQConfig {
         const val WARN_QUEUE = "warn_queue"
         const val INFO_QUEUE = "info_queue"
 
-        const val DIRECT_EXCHANGE = "direct_exchange"
+//        const val DIRECT_EXCHANGE = "direct_exchange"
+        
+        const val ALL_LOG_QUE = "all_log_queue"
+        const val TOPIC_EXCHANGE = "topic_exchange"
     }
 
     @Bean
-    fun directExchange(): DirectExchange {
-        return DirectExchange(DIRECT_EXCHANGE)
+    fun topicExchange(): TopicExchange {
+        return TopicExchange(TOPIC_EXCHANGE)
     }
+
+//    @Bean
+//    fun directExchange(): DirectExchange {
+//        return DirectExchange(DIRECT_EXCHANGE)
+//    }
 
     @Bean
     fun errorQueue(): Queue {
@@ -40,17 +48,27 @@ class RabbitMQConfig {
     }
 
     @Bean
-    fun errorBinding(directExchange: DirectExchange): Binding {
-        return BindingBuilder.bind(errorQueue()).to(directExchange).with("error")
+    fun allLogQueue(): Queue {
+        return Queue(ALL_LOG_QUE, false)
     }
 
     @Bean
-    fun warnBinding(directExchange: DirectExchange): Binding {
-        return BindingBuilder.bind(warnQueue()).to(directExchange).with("warn")
+    fun errorBinding(topicExchange: TopicExchange): Binding {
+        return BindingBuilder.bind(errorQueue()).to(topicExchange).with("log.error")
     }
 
     @Bean
-    fun infoBinding(directExchange: DirectExchange): Binding {
-        return BindingBuilder.bind(infoQueue()).to(directExchange).with("info")
+    fun warnBinding(topicExchange: TopicExchange): Binding {
+        return BindingBuilder.bind(warnQueue()).to(topicExchange).with("log.warn")
+    }
+
+    @Bean
+    fun infoBinding(topicExchange: TopicExchange): Binding {
+        return BindingBuilder.bind(infoQueue()).to(topicExchange).with("log.info")
+    }
+
+    @Bean
+    fun allLogBinding(topicExchange: TopicExchange): Binding {
+        return BindingBuilder.bind(allLogQueue()).to(topicExchange).with("log.*")
     }
 }

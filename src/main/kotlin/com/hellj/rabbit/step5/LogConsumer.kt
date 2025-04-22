@@ -8,7 +8,7 @@ private val logger = KotlinLogging.logger {}
 
 @Component
 class LogConsumer {
-    
+
     @RabbitListener(queues = [RabbitMQConfig.ERROR_QUEUE])
     fun consumeError(message: String) {
         logger.error { "[ERROR]: $message" }
@@ -22,5 +22,10 @@ class LogConsumer {
     @RabbitListener(queues = [RabbitMQConfig.INFO_QUEUE])
     fun consumeInfo(message: String) {
         logger.info { "[INFO]: $message" }
+    }
+
+    @RabbitListener(queues = [RabbitMQConfig.ALL_LOG_QUE])
+    fun consumeAllLogs(message: String) {
+        logger.info { "[ALL LOGS]: $message" }
     }
 }

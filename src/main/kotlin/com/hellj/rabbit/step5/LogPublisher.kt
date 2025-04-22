@@ -12,7 +12,7 @@ class LogPublisher(
 ) {
 
     fun publish(routingKey: String, message: String) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE, routingKey, message)
+        rabbitTemplate.convertAndSend(RabbitMQConfig.TOPIC_EXCHANGE, routingKey, message)
         logger.info { "message published : $routingKey: $message" }
     }
 
