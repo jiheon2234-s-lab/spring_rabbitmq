@@ -43,7 +43,7 @@ class RabbitMQConfig {
 
     @Bean
     fun orderQueueBinding(orderQueue: Queue, orderExchange: TopicExchange): Binding {
-        return BindingBuilder.bind(orderQueue).to(orderExchange).with("order.completed")
+        return BindingBuilder.bind(orderQueue).to(orderExchange).with("order.completed.*")
     }
 
     @Bean

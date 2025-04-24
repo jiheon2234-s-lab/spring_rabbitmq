@@ -1,12 +1,12 @@
 package com.hellj.rabbit.step8
 
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.retry.backoff.FixedBackOffPolicy
 import org.springframework.retry.policy.SimpleRetryPolicy
 import org.springframework.retry.support.RetryTemplate
 
-@Configuration
+//@Configuration
+// application.yml에서 설정하도록 변경
 class ReplyConfig {
 
     @Bean
