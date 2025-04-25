@@ -1,6 +1,12 @@
 spring:
   application:
     name: MessageQueStudy
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
   rabbitmq:
     host: localhost
     port: 5672
@@ -14,3 +20,6 @@ spring:
           max-attempts: 3
           max-interval: 10000ms
         default-requeue-rejected: false
+  h2:
+    console:
+      enabled: true
