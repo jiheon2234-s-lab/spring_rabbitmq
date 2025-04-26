@@ -20,6 +20,7 @@ spring:
           max-attempts: 3
           max-interval: 10000ms
         default-requeue-rejected: false
+    publisher-confirm-type: correlated
   h2:
     console:
       enabled: true
