@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: MessageQueStudy
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 1000ms
+          max-attempts: 3
+          max-interval: 10000ms
+        default-requeue-rejected: false
+    publisher-confirm-type: correlated
+  h2:
+    console:
+      enabled: true
